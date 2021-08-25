@@ -11,11 +11,12 @@ fn main() {
     env_logger::init();
 
     let mut router = Router::new();
+    let searcher = zipcode_api::Searcher::new();
     let render = html::Render::new().unwrap();
     router.get("/", index_handler::IndexHandler::new(), "index");
     router.get(
         "/zipcode",
-        zipcode_handler::ZipcodeHandler::new(render),
+        zipcode_handler::ZipcodeHandler::new(searcher, render),
         "zipcode",
     );
 
