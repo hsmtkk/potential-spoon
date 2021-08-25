@@ -1,5 +1,6 @@
 mod html;
 mod index_handler;
+mod zipcode_api;
 mod zipcode_handler;
 
 use iron::Iron;
