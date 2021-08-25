@@ -1,0 +1,24 @@
+{% for address in addresses %}
+<table>
+    <tr>
+        <th>zipcode</th>
+        <td>{{address.zipcode}}</td>
+    </tr>
+    <tr>
+        <th>prefcode</th>
+        <td>{{address.prefcode}}</td>
+    </tr>
+    <tr>
+        <th>address1</th>
+        <td>{{address.address1}}</td>
+    </tr>
+    <tr>
+        <th>address2</th>
+        <td>{{address.address2}}</td>
+    </tr>
+    <tr>
+        <th>address3</th>
+        <td>{{address.address3}}</td>
+    </tr>
+</table>
+{% endfor %}

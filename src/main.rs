@@ -11,7 +11,7 @@ fn main() {
     env_logger::init();
 
     let mut router = Router::new();
-    let render = html::Render::new();
+    let render = html::Render::new().unwrap();
     router.get("/", index_handler::IndexHandler::new(), "index");
     router.get(
         "/zipcode",
