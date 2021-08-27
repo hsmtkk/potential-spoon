@@ -15,6 +15,7 @@ steps:
   - name: cargo_clippy
     image: rust:1.54
     commands:
+      - rustup component add clippy
       - cargo clippy
   - name: docker_build
     image: plugins/docker:19.03.8
