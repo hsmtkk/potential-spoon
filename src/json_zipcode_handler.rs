@@ -1,4 +1,4 @@
-use actix_web::{HttpRequest, HttpResponse, Responder};
+use actix_web::{HttpRequest, HttpResponse};
 use crate::zipcode_api::Searcher;
 use log::info;
 

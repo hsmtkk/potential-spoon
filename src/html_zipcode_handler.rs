@@ -1,4 +1,4 @@
-use actix_web::{HttpRequest, HttpResponse, Responder};
+use actix_web::{HttpRequest, HttpResponse};
 use log::info;
 use tera::{Context, Tera};
 

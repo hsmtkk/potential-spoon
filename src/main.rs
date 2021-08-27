@@ -2,7 +2,7 @@ mod html_zipcode_handler;
 mod json_zipcode_handler;
 mod zipcode_api;
 
-use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{web, App, HttpServer};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
