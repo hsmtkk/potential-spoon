@@ -16,7 +16,8 @@ COPY --from=builder /opt/target/release/potential-spoon /opt/potential-spoon
 COPY template /opt/template
 
 ENV LISTEN_ADDRESS=0.0.0.0 \
- LISTEN_PORT=8000
+ LISTEN_PORT=8000 \
+ RUST_LOG=info
 
 EXPOSE 8000
 
