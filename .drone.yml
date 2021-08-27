@@ -11,7 +11,7 @@ steps:
   - name: hadolint
     image: hadolint/hadolint:2.6.0-alpine
     commands:
-      - hadolint Dockerfile
+      - hadolint --ignore DL3006 Dockerfile
   - name: cargo_clippy
     image: rust:1.54
     commands:
