@@ -19,6 +19,8 @@ steps:
       - cargo clippy
   - name: docker_build
     image: plugins/docker:19.03.8
+    environment:
+      DOCKER_BUILDKIT: 1
     settings:
       username: hsmtkk
       password:
