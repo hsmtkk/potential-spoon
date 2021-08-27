@@ -1,12 +1,6 @@
-/*
-mod html;
-mod index_handler;
-mod zipcode_api;
-mod zipcode_handler;
-*/
-
 mod html_zipcode_handler;
 mod json_zipcode_handler;
+mod zipcode_api;
 
 use actix_web::{web, App, HttpRequest, HttpServer, Responder};
 
