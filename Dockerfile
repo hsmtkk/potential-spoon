@@ -8,12 +8,13 @@ COPY Cargo.toml /opt/Cargo.toml
 
 RUN cargo build --release
 
-FROM gcr.io/distroless/static-debian10 AS runtime
+FROM gcr.io/distroless/cc-debian10 AS runtime
 
 WORKDIR /opt
 
 COPY --from=builder /opt/target/release/potential-spoon /opt/potential-spoon
 COPY template /opt/template
+COPY static /opt/static
 
 ENV LISTEN_ADDRESS=0.0.0.0 \
  LISTEN_PORT=8000 \
@@ -21,4 +22,4 @@ ENV LISTEN_ADDRESS=0.0.0.0 \
 
 EXPOSE 8000
 
-CMD ["/opt/potential-spoon"]
+ENTRYPOINT ["/opt/potential-spoon"]
