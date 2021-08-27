@@ -1,0 +1,22 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: yamllint
+    image: sdesbure/yamllint:latest
+    commands:
+      - yamllint .drone.yml
+  - name: hadolint
+    image: hadolint/hadolint:2.6.0-alpine
+    commands:
+      - hadolint Dockerfile
+  - name: cargo_clippy
+    image: rust:1.54
+    commands:
+      - cargo clippy
+  - name: docker_build
+    image: plugins/docker:19.03.8
+    settings:
+      todo: x
