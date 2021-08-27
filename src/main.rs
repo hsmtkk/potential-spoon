@@ -1,31 +1,28 @@
+/*
 mod html;
 mod index_handler;
 mod zipcode_api;
 mod zipcode_handler;
+*/
 
-use iron::Iron;
-use log::info;
-use router::Router;
+mod html_zipcode_handler;
+mod json_zipcode_handler;
 
-fn main() {
+use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
     env_logger::init();
-
-    let mut router = Router::new();
-    let searcher = zipcode_api::Searcher::new();
-    let render = html::Render::new().unwrap();
-    router.get("/", index_handler::IndexHandler::new(), "index");
-    router.get(
-        "/zipcode",
-        zipcode_handler::ZipcodeHandler::new(searcher, render),
-        "zipcode",
-    );
-
     let addr = get_listen_address();
     let port = get_listen_port();
-    let listen_addr = format!("{}:{}", addr, port);
-    info!("start {}", listen_addr);
-
-    Iron::new(router).http(listen_addr).unwrap();
+    HttpServer::new(|| {
+        App::new()
+            .route("/html/{zipcode}", web::get().to(html_zipcode_handler::handle))
+            .route("/json/{zipcode}", web::get().to(json_zipcode_handler::handle))
+    })
+    .bind((addr, port))?
+    .run()
+    .await
 }
 
 fn get_listen_address() -> String {
@@ -35,10 +32,10 @@ fn get_listen_address() -> String {
     }
 }
 
-fn get_listen_port() -> i32 {
+fn get_listen_port() -> u16 {
     match std::env::var("LISTEN_PORT") {
         Ok(port_str) => {
-            match port_str.parse::<i32>() {
+            match port_str.parse::<u16>() {
                 Ok(port) => port,
                 Err(_e) => 8000,
             }},
