@@ -11,6 +11,7 @@ async fn main() -> std::io::Result<()> {
     let port = get_listen_port();
     HttpServer::new(|| {
         App::new()
+            .service(actix_files::Files::new("/static", "./static").show_files_listing())
             .route("/html/{zipcode}", web::get().to(html_zipcode_handler::handle))
             .route("/json/{zipcode}", web::get().to(json_zipcode_handler::handle))
     })
