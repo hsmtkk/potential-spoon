@@ -1,9 +1,10 @@
-use actix_web::HttpRequest;
-use actix_web::Responder;
-use log::{info};
+use actix_web::{HttpRequest, HttpResponse, Responder};
+use log::info;
 
-pub async fn handle(req: HttpRequest) -> impl Responder {
+pub async fn handle(req: HttpRequest) -> HttpResponse {
     let zipcode = req.match_info().get("zipcode").unwrap();
     info!("json_zipcode_handler {}", zipcode);
-    r#"{"foo":"bar"}"#
+    HttpResponse::Ok()
+    .content_type("application/json")
+    .body(r#"{"foo":"bar"}"#)
 }
