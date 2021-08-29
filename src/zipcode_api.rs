@@ -1,5 +1,6 @@
 use anyhow::Result;
 
+#[derive(Clone, Copy)]
 pub struct Searcher {}
 
 const API_URL: &str = "https://zipcloud.ibsnet.co.jp/api/search";
