@@ -12,6 +12,7 @@ steps:
     image: sdesbure/yamllint:latest
     commands:
       - yamllint .drone.yml
+      - yamllint heroku.yml
   - name: hadolint
     depends_on:
       - yamllint
