@@ -11,7 +11,7 @@ steps:
   - name: hadolint
     image: hadolint/hadolint:2.6.0-alpine
     commands:
-      - hadolint Dockerfile
+      - hadolint --ignore DL3006 Dockerfile
   - name: cargo_clippy
     image: rust:1.54
     commands:
@@ -19,4 +19,8 @@ steps:
   - name: docker_build
     image: plugins/docker:19.03.8
     settings:
-      todo: x
+      username: hsmtkk
+      password:
+        from_secret: dockerhub_token
+      repo: hsmtkk/potential-spoon
+      squash: true
