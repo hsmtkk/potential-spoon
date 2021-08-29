@@ -17,9 +17,9 @@ COPY template /opt/template
 COPY static /opt/static
 
 ENV LISTEN_ADDRESS=0.0.0.0 \
- LISTEN_PORT=8000 \
+ LISTEN_PORT=80 \
  RUST_LOG=info
 
-EXPOSE 8000
+EXPOSE 80
 
 ENTRYPOINT ["/opt/potential-spoon"]
