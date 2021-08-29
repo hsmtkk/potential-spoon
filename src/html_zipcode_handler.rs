@@ -1,9 +1,15 @@
-use actix_web::HttpRequest;
-use actix_web::Responder;
+use actix_web::{HttpRequest, HttpResponse};
 use log::info;
+use tera::{Context, Tera};
 
-pub async fn handle(req: HttpRequest) -> impl Responder {
+pub async fn handle(req: HttpRequest) -> HttpResponse {
     let zipcode = req.match_info().get("zipcode").unwrap();
     info!("html_zipcode_handler {}", zipcode);
-    "<html><body><p>Hello World</p></body></html>"
+    let tera = Tera::new("template/*.html").unwrap();
+    let mut context = Context::new();
+    context.insert("zipcode", &zipcode);
+    let html = tera.render("index.html", &context).unwrap();
+    HttpResponse::Ok()
+    .content_type("text/html")
+    .body(html)
 }
