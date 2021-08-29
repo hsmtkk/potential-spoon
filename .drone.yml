@@ -3,6 +3,10 @@ kind: pipeline
 type: docker
 name: default
 
+trigger:
+  event:
+    - push
+
 steps:
   - name: yamllint
     image: sdesbure/yamllint:latest
