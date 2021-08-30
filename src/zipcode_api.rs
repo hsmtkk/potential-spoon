@@ -1,17 +1,17 @@
 use anyhow::Result;
 
-#[derive(Clone, Copy)]
-pub struct Searcher {}
-
-const API_URL: &str = "https://zipcloud.ibsnet.co.jp/api/search";
+#[derive(Clone)]
+pub struct Searcher {
+    host: String,
+}
 
 impl Searcher {
-    pub fn new() -> Searcher {
-        Searcher {}
+    pub fn new(host:&str) -> Searcher {
+        Searcher {host:host.to_string()}
     }
 
     pub fn search(&self, zipcode: &str) -> Result<String> {
-        let url = format!("{}?zipcode={}", API_URL, zipcode);
+        let url = format!("https://{}/api/search?zipcode={}", self.host, zipcode);
         let json = reqwest::blocking::get(url)?.text()?;
         Ok(json)
     }
