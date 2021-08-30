@@ -3,11 +3,16 @@ kind: pipeline
 type: docker
 name: default
 
+trigger:
+  event:
+    - push
+
 steps:
   - name: yamllint
     image: sdesbure/yamllint:latest
     commands:
       - yamllint .drone.yml
+      - yamllint heroku.yml
   - name: hadolint
     depends_on:
       - yamllint

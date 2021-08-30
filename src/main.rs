@@ -9,10 +9,10 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let addr = get_listen_address();
     let port = get_listen_port();
-    let searcher = zipcode_api::Searcher::new();
-    HttpServer::new(move || {
+    let searcher = zipcode_api::Searcher::new("zipcloud.ibsnet.co.jp");
+    HttpServer::new(move|| {
         App::new()
-            .data(searcher)
+            .data(searcher.clone())
             .service(actix_files::Files::new("/static", "./static").show_files_listing())
             .route(
                 "/html/{zipcode}",
